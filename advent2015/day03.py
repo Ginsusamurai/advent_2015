@@ -1,5 +1,6 @@
 import csv
 from day01 import splitter
+import json
 
 
 
@@ -11,9 +12,9 @@ if __name__ == "__main__":
 
     print(len(packages))
 
-    gifted = [[0,0]]
+    gifted = set()
     pos = [0,0]
-
+    gifted.add(json.dumps(pos))
     for step in packages:
         # print(step)
         if step == "<":
@@ -25,7 +26,6 @@ if __name__ == "__main__":
         elif step == "V":
             pos[1] -= 1
 
-        if pos not in gifted:
-            gifted.append(pos[:])
+        gifted.add(json.dumps(pos))
 
-    print(gifted)
+    print(len(gifted))
