@@ -29,3 +29,4 @@ if __name__ == "__main__":
         gifted.add(json.dumps(pos))
 
     print(len(gifted))
+    print(gifted)
