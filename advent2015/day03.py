@@ -10,23 +10,49 @@ if __name__ == "__main__":
         reader = csv.reader(f)
         packages = splitter(list(reader)[0][0])
 
-    print(len(packages))
+    # print(len(packages))
 
     gifted = set()
-    pos = [0,0]
-    gifted.add(json.dumps(pos))
+    teamGifted = set()
+    santa = [0,0]
+    realSanta = [0,0]
+    roboSanta = [0,0]
+    gifted.add(json.dumps(santa))
+    teamGifted.update({json.dumps(realSanta), json.dumps(roboSanta)})
+
     for step in packages:
-        # print(step)
         if step == "<":
-            pos[0] -= 1
+            santa[0] -= 1
         elif step == ">":
-            pos[0] += 1
+            santa[0] += 1
         elif step == "^":
-            pos[1] += 1
-        elif step == "V":
-            pos[1] -= 1
+            santa[1] += 1
+        elif step == "v":
+            santa[1] -= 1
 
-        gifted.add(json.dumps(pos))
+        gifted.add(json.dumps(santa))
 
-    print(len(gifted))
-    print(gifted)
+    for ind, step in enumerate(packages, 0):
+
+        if ind % 2 == 0:
+            listener = roboSanta
+        else:
+            listener = realSanta
+
+        if step == "<":
+            listener[0] -= 1
+        elif step == ">":
+            listener[0] += 1
+        elif step == "^":
+            listener[1] += 1
+        elif step == "v":
+            listener[1] -= 1
+
+
+
+        teamGifted.update({json.dumps(realSanta), json.dumps(roboSanta)})
+
+
+
+    print("Day03.1 -> Santa gave {} households at least 1 toy.".format(len(gifted)))
+    print("Day03.2 -> Santa and Robot gifted {} houses at least 1 toy together".format(len(teamGifted)))
