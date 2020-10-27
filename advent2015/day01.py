@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # This is a sample Python script.
 import itertools
 import csv
